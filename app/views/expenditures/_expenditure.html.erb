@@ -1,0 +1,10 @@
+<tr>
+  <td class="align-middle">$<%= expenditure.amount %></td>
+  <td class="align-middle"><%= expenditure.title %></td>
+  <td class="align-middle"><%= expenditure.category %></td>
+  <td class="align-middle"><%= expenditure.date %></td>
+  <td align="center"><%= link_to "delete", expenditure,
+                                          method: :delete,
+                                          data: { confirm: "Are you sure?" },
+                                          class: "btn btn-danger btn-sm"%></td>
+</tr>
