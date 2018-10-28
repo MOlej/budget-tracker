@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2018_10_23_154432) do
 
   create_table "expenditures", force: :cascade do |t|
-    t.float "amount"
+    t.decimal "amount", precision: 6, scale: 2
     t.string "title"
     t.string "category"
     t.date "date"
