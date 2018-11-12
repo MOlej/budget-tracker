@@ -39,4 +39,5 @@ class ActiveSupport::TestCase
 
   Capybara.javascript_driver = :headless_chrome
   Capybara.current_driver = Capybara.javascript_driver # :selenium by default
+  Capybara.default_driver = :headless_chrome
 end
