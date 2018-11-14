@@ -43,12 +43,8 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-form input[type='number']::-webkit-inner-spin-button,
-form input[type='number']::-webkit-outer-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
-}
-
-select {
-  -moz-appearance: none;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
