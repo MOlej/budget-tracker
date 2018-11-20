@@ -55,4 +55,26 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     assert page.has_field?('expenditure_category', with: '', type: 'select')
     assert page.has_field?('expenditure_date', with: Time.zone.today, type: 'date')
   end
+
+  test 'add new expenditure after sorting' do
+    visit('/expenditures')
+
+    assert_difference 'Expenditure.count', 1 do
+      click_button('Add')
+    end
+
+    # Sort table
+    click_link('Amount')
+
+    assert_difference 'Expenditure.count', 1 do
+      click_button('Add')
+    end
+
+    # Refresh page
+    visit(current_path)
+
+    assert_difference 'Expenditure.count', 1 do
+      click_button('Add')
+    end
+  end
 end
