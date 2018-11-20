@@ -17,13 +17,13 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
       click_button('Add')
     end
 
-    expenditure_id = "expenditure_#{Expenditure.first.id}"
-    expenditure = page.find_by_id(expenditure_id)
+    expenditure_id = "expenditure_#{Expenditure.last.id}"
+    expenditure = page.find_by_id(expenditure_id).find_css('td')
 
-    assert expenditure.has_content?('$52.13')
-    assert expenditure.has_content?('Walmart')
-    assert expenditure.has_content?('Groceries')
-    assert expenditure.has_content?(Time.zone.today)
+    assert expenditure[0].visible_text.eql? '$52.13'
+    assert expenditure[1].visible_text.eql? 'Walmart'
+    assert expenditure[2].visible_text.eql? 'Groceries'
+    assert expenditure[3].visible_text.eql? Time.zone.today.strftime
 
     # Delete added expenditure
     assert_difference 'Expenditure.count', -1 do
@@ -38,13 +38,13 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
       click_button('Add')
     end
 
-    expenditure_id = "expenditure_#{Expenditure.first.id}"
-    expenditure = page.find_by_id(expenditure_id)
+    expenditure_id = "expenditure_#{Expenditure.last.id}"
+    expenditure = page.find_by_id(expenditure_id).find_css('td')
 
-    assert expenditure.has_content?('$0.00')
-    assert expenditure.has_content?('Untitled')
-    assert expenditure.has_content?('Uncategorised')
-    assert expenditure.has_content?(Time.zone.today)
+    assert expenditure[0].visible_text.eql? '$0.00'
+    assert expenditure[1].visible_text.eql? 'Untitled'
+    assert expenditure[2].visible_text.eql? 'Uncategorised'
+    assert expenditure[3].visible_text.eql? Time.zone.today.strftime
   end
 
   test 'verify form for new expenditure' do
