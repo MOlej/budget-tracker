@@ -1,7 +1,7 @@
 class Expenditure < ApplicationRecord
   before_save :set_defaults
 
-  default_scope -> { order(date: :desc) }
+  # default_scope -> { order(date: :desc) }
 
   def set_defaults
       self.amount ||= 0

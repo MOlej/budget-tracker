@@ -1,6 +1,8 @@
 class ExpendituresController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   def index
-    @expenditures = Expenditure.all
+    @expenditures = Expenditure.order(Arel.sql("#{case_insensitive(sort_column)} #{sort_direction}"), date: :desc, created_at: :desc)
     @expenditure = Expenditure.new
   end
 
@@ -8,18 +10,30 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.new(user_params)
     @expenditure.save
 
-    redirect_to expenditures_path
+    redirect_back(fallback_location: expenditures_path)
   end
 
   def destroy
     Expenditure.find(params[:id]).destroy
 
-    redirect_to expenditures_path
+    redirect_back(fallback_location: expenditures_path)
   end
 
   private
 
     def user_params
       params.require(:expenditure).permit(:amount, :title, :category, :date)
+    end
+
+    def sort_column
+      Expenditure.column_names.include?(params[:column]) ? params[:column] : 'date'
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
+    end
+
+    def case_insensitive(column)
+      %w[title category].include?(column) ? "lower(#{column})" : column
     end
 end
