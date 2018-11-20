@@ -1,17 +1,47 @@
 <div class="table-responsive col-md-8">
-  <table class="table table-sm table-hover">
-    <thead class="thead-light">
-      <tr>
-        <th>Amount</th>
-        <th>Title</th>
-        <th>Category</th>
-        <th>Date</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render 'new' %>
-      <%= render @expenditures %>
-    </tbody>
-  </table>
+  <%= form_for @expenditure, :html => { class: "needs-validation" } do |f| %>
+    <table class="table table-sm table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th><%= sort 'amount' %></th>
+          <th><%= sort 'title' %></th>
+          <th><%= sort 'category' %></th>
+          <th><%= sort 'date' %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="align-middle" align="center">
+            <%= f.number_field :amount, style: "width: 70px;",
+                                        class: "form-control",
+                                        min: "0",
+                                        step: "0.01" %>
+          </td>
+
+          <td class="align-middle" align="center">
+          <%= f.text_field :title, class: "form-control" %>
+          </td>
+
+          <td class="align-middle" align="center">
+            <%= f.select :category, grouped_options_for_select(Expenditure::CATEGORIES),
+                                    { include_blank: true },
+                                    style: "width: 150px",
+                                    class: "form-control custom-select" %>
+          </td>
+
+          <td class="align-middle" align="center">
+            <%= f.date_field :date, style: "width: 150px",
+                                    value: Time.zone.today,
+                                    class: "form-control" %>
+          </td>
+
+          <td class="align-middle" align="center">
+          <%= f.submit "Add", class: "btn btn-primary" %>
+          </td>
+        </tr>
+        <%= render @expenditures %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
