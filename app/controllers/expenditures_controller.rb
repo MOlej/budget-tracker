@@ -2,7 +2,7 @@ class ExpendituresController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @expenditures = Expenditure.order(Arel.sql("#{case_insensitive(sort_column)} #{sort_direction}"), date: :desc, created_at: :desc)
+    @expenditures = Expenditure.search(params[:search]).order(Arel.sql("#{case_insensitive(sort_column)} #{sort_direction}"), date: :desc, created_at: :desc)
     @expenditure = Expenditure.new
   end
 
