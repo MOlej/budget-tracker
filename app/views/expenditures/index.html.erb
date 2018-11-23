@@ -1,47 +1,26 @@
-<div class="table-responsive col-md-8">
-  <%= form_for @expenditure, :html => { class: "needs-validation" } do |f| %>
-    <table class="table table-sm table-hover">
-      <thead class="thead-light">
-        <tr>
-          <th><%= sort 'amount' %></th>
-          <th><%= sort 'title' %></th>
-          <th><%= sort 'category' %></th>
-          <th><%= sort 'date' %></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="align-middle" align="center">
-            <%= f.number_field :amount, style: "width: 70px;",
-                                        class: "form-control",
-                                        min: "0",
-                                        step: "0.01" %>
-          </td>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <%= form_tag expenditures_path, method: 'get' do %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :column, params[:column] %>
+        <div class="form-row">
+          <div class="col-sm-8 my-1">
+            <%= text_field_tag :search, params[:search],
+                                        class: "form-control form-control-sm"%>
 
-          <td class="align-middle" align="center">
-          <%= f.text_field :title, class: "form-control" %>
-          </td>
-
-          <td class="align-middle" align="center">
-            <%= f.select :category, grouped_options_for_select(Expenditure::CATEGORIES),
-                                    { include_blank: true },
-                                    style: "width: 150px",
-                                    class: "form-control custom-select" %>
-          </td>
-
-          <td class="align-middle" align="center">
-            <%= f.date_field :date, style: "width: 150px",
-                                    value: Time.zone.today,
-                                    class: "form-control" %>
-          </td>
-
-          <td class="align-middle" align="center">
-          <%= f.submit "Add", class: "btn btn-primary" %>
-          </td>
-        </tr>
-        <%= render @expenditures %>
-      </tbody>
-    </table>
-  <% end %>
+          </div>
+        <div class="col-auto my-1">
+        <%= submit_tag "Search", name: nil,
+                                 class: "btn btn-sm btn-primary" %>
+        </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="table-responsive col-md-8">
+      <div id="expenditures">
+        <%= render 'table' %>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,44 @@
+<%= form_for @expenditure, :html => { class: "needs-validation" } do |f| %>
+  <table class="table table-sm table-hover">
+    <thead class="thead-light">
+      <tr id="sort">
+        <th><%= sort 'amount' %></th>
+        <th><%= sort 'title' %></th>
+        <th><%= sort 'category' %></th>
+        <th><%= sort 'date' %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="align-middle" align="middle">
+          <%= f.number_field :amount, style: "width: 6em;",
+                                      class: "form-control",
+                                      min: "0",
+                                      step: "0.01" %>
+        </td>
+
+        <td class="align-middle">
+        <%= f.text_field :title, class: "form-control" %>
+        </td>
+        <td class="align-middle">
+          <%= f.select :category, grouped_options_for_select(Expenditure::CATEGORIES),
+                                  { include_blank: true },
+                                  style: "width: 15em",
+                                  class: "form-control custom-select" %>
+        </td>
+
+        <td class="align-middle" align="middle">
+          <%= f.date_field :date, style: "width: 11em",
+                                  value: Time.zone.today,
+                                  class: "form-control" %>
+        </td>
+
+        <td class="align-middle">
+        <%= f.submit "Add", class: "btn btn-primary" %>
+        </td>
+      </tr>
+      <%= render @expenditures %>
+    </tbody>
+  </table>
+<% end %>
