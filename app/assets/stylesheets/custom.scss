@@ -27,10 +27,16 @@ table {
     font-size: 1.2em;
   }
   td {
+    vertical-align: middle;
+    justify-content: center;
   }
 }
 
 /* header */
+
+.navbar {
+  margin-bottom: 1em;
+}
 
 .navbar-brand {
   font: 1.5em "Fira Sans", sans-serif;
