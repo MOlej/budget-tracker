@@ -16,3 +16,14 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+
+
+$(function () {
+  $('#sort').on('click', 'a', function (event) {
+//    event.preventDefault();
+    $.getScript(this.href);
+    console.log("Sorting", this);
+    return false;
+  });
+});
