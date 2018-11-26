@@ -12,26 +12,29 @@
     <tbody>
       <tr>
         <td class="align-middle" align="middle">
-          <%= f.number_field :amount, style: "width: 6em;",
-                                      class: "form-control",
-                                      min: "0",
-                                      step: "0.01" %>
+          <%= f.number_field :amount,
+            style: "width: 6em;",
+            class: "form-control",
+            min: "0",
+            step: "0.01" %>
         </td>
 
         <td class="align-middle">
         <%= f.text_field :title, class: "form-control" %>
         </td>
         <td class="align-middle">
-          <%= f.select :category, grouped_options_for_select(Expenditure::CATEGORIES),
-                                  { include_blank: true },
-                                  style: "width: 15em",
-                                  class: "form-control custom-select" %>
+          <%= f.select :category,
+            grouped_options_for_select(Expenditure::CATEGORIES),
+            { include_blank: true },
+            style: "width: 15em",
+            class: "form-control custom-select" %>
         </td>
 
         <td class="align-middle" align="middle">
-          <%= f.date_field :date, style: "width: 11em",
-                                  value: Time.zone.today,
-                                  class: "form-control" %>
+          <%= f.date_field :date,
+            style: "width: 11em",
+            value: Time.zone.today,
+            class: "form-control" %>
         </td>
 
         <td class="align-middle">
