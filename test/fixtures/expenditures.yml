@@ -11,3 +11,19 @@ two:
   title: Pizza
   category: Fast Food
   date: 2018-10-26
+
+three:
+  amount: 5.99
+  title: Food
+  category: Groceries
+  date: 2018-10-24
+
+four:
+  amount: 30
+  title: A
+  date: 2018-10-21
+
+five:
+  amount: 6
+  title: a
+  date: 2018-10-22

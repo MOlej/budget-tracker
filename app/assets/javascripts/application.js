@@ -16,3 +16,12 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+$.ajaxSetup({ cache: true });
+
+$(function () {
+  $(document).on('click', '#sort a', function () {
+    $.getScript(this.href);
+    return false;
+  });
+});
