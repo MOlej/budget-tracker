@@ -1,0 +1,5 @@
+$('#expenditures').html('<%= j render 'table' %>');
+
+// update sort params in search form
+$('#column').val('<%= j params[:column] %>');
+$('#direction').val('<%= j params[:direction] %>');

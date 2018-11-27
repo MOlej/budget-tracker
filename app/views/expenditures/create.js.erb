@@ -1,0 +1,6 @@
+$('#new-expenditure-form')
+  .after($('<tr><%= j render @expenditure %></tr>')
+    .hide()
+    .fadeIn('normal')
+  );
+$("#new-expenditure-form select, input[type='text'], input[type='number']").val('');
