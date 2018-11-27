@@ -1,0 +1,14 @@
+      <%= form_tag expenditures_path, method: 'get', remote: true do %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :column, params[:column] %>
+        <div class="form-row">
+          <div class="col-sm-8 my-1">
+            <%= text_field_tag :search, params[:search],
+                                        class: "form-control form-control-sm"%>
+          </div>
+          <div class="col-auto my-1">
+            <%= submit_tag "Search", name: nil,
+                                     class: "btn btn-sm btn-primary" %>
+          </div>
+      </div>
+      <% end %>

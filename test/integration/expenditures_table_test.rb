@@ -77,4 +77,38 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
       click_button('Add')
     end
   end
+
+  test 'sort table' do
+    visit('/expenditures')
+
+    # sort by amount ascending
+    click_link('Amount')
+
+    within(:xpath, "//table/tbody/tr[2]") do
+      assert page.has_content?('$1.99')
+    end
+
+    # sort by amount descending
+    click_link('Amount')
+
+    within(:xpath, "//table/tbody/tr[2]") do
+      assert page.has_content?('$30.00')
+    end
+    # secondary date sort
+    within(:xpath, "//table/tbody/tr[3]") do
+      assert page.has_content?('$30.00')
+      assert page.has_content?('2018-10-21')
+    end
+
+    # sort by title (case insensitive)
+    click_link('Title')
+
+    within(:xpath, "//table/tbody/tr[3]") do
+      assert page.has_content?('a')
+    end
+
+    within(:xpath, "//table/tbody/tr[4]") do
+      assert page.has_content?('A')
+    end
+  end
 end

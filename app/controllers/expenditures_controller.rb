@@ -14,15 +14,24 @@ class ExpendituresController < ApplicationController
 
   def create
     @expenditure = Expenditure.new(user_params)
-    @expenditure.save
 
-    redirect_back(fallback_location: expenditures_path)
+    respond_to do |format|
+      if @expenditure.save
+        format.html { redirect_back(fallback_location: expenditures_path) }
+        format.js
+      end
+    end
   end
 
   def destroy
-    Expenditure.find(params[:id]).destroy
+    @expenditure = Expenditure.find(params[:id])
 
-    redirect_back(fallback_location: expenditures_path)
+    respond_to do |format|
+      if @expenditure.destroy
+        format.html { redirect_back(fallback_location: expenditures_path) }
+        format.js
+      end
+    end
   end
 
   private
