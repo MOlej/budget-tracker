@@ -41,3 +41,9 @@ class ActiveSupport::TestCase
   Capybara.current_driver = Capybara.javascript_driver # :selenium by default
   Capybara.default_driver = :headless_chrome
 end
+
+def wait_for_ajax
+  Timeout.timeout(Capybara.default_max_wait_time) do
+    loop until page.evaluate_script('window.XMLHttpRequest.DONE').eql?(4)
+  end
+end
