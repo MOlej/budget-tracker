@@ -32,9 +32,10 @@
     <div class="form-row">
       <div class="form-group col-sm-5">
         <%= f.label :date %>
-        <%= f.date_field :date,
+        <%= f.text_field :date,
           value:  @expenditure.date || Time.zone.today,
-          class: "form-control" %>
+          class: "form-control",
+          id: "expenditure_date" %>
       </div>
     </div>
   </div>
