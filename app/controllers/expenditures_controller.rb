@@ -12,6 +12,15 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.new
   end
 
+  def new
+    @expenditure = Expenditure.new
+
+    respond_to do |format|
+      format.html { render partial: 'form' }
+      format.js { render 'form' }
+    end
+  end
+
   def create
     @expenditure = Expenditure.new(user_params)
 
@@ -20,6 +29,25 @@ class ExpendituresController < ApplicationController
         format.html { redirect_back(fallback_location: expenditures_path) }
         format.js
       end
+    end
+  end
+
+  def edit
+    @expenditure = Expenditure.find(params[:id])
+
+    respond_to do |format|
+      format.html { render partial: 'form' }
+      format.js { render 'form' }
+    end
+  end
+
+  def update
+    @expenditure = Expenditure.find(params[:id])
+    @expenditure.update(user_params)
+
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: expenditures_path) }
+      format.js
     end
   end
 

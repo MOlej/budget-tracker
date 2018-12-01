@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="expenditure_modal"><%= "#{action_name.capitalize} #{controller_name.singularize}" %></h4>
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<%= form_for @expenditure, html: { class: "needs-validation form-horizontal" }, remote: true do |f| %>
+  <div class="modal-body">
+    <div class="form-row">
+      <div class="form-group col-sm-5">
+        <%= f.label :amount %>
+        <%= f.number_field :amount,
+          class: "form-control",
+          min: "0",
+          step: "0.01" %>
+      </div>
+
+      <div class="form-group col-sm-7">
+        <%= f.label :category %>
+        <%= f.select :category,
+          grouped_options_for_select(Expenditure::CATEGORIES, @expenditure.category),
+          { include_blank: true },
+          class: "form-control custom-select" %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-sm-12">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-sm-5">
+        <%= f.label :date %>
+        <%= f.date_field :date,
+          value:  @expenditure.date || Time.zone.today,
+          class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
