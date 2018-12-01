@@ -1,10 +1,5 @@
 $("#modal-window").modal("hide");
-  $('#expenditures_table > tbody')
-    .prepend($('<%= j render @expenditure %>')
-      .hide()
-      .fadeIn('normal')
-    );
-
+$('#expenditure_<%= @expenditure.id %>').replaceWith('<%= j render @expenditure %>');
 $('#expenditure_<%= @expenditure.id %>')
   .animate({backgroundColor: "#afedc3"}, 200)
   .animate({backgroundColor: "#fff"}, 400)
