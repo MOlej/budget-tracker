@@ -1,6 +1,8 @@
 class ExpendituresController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  before_action :set_expenditure, only: %i[edit update destroy]
+
   def index
     @expenditures = Expenditure
       .search(params[:search])
@@ -22,7 +24,7 @@ class ExpendituresController < ApplicationController
   end
 
   def create
-    @expenditure = Expenditure.new(user_params)
+    @expenditure = Expenditure.new(expenditure_params)
 
     respond_to do |format|
       if @expenditure.save
@@ -33,8 +35,6 @@ class ExpendituresController < ApplicationController
   end
 
   def edit
-    @expenditure = Expenditure.find(params[:id])
-
     respond_to do |format|
       format.html { render partial: 'form' }
       format.js { render 'form' }
@@ -42,8 +42,7 @@ class ExpendituresController < ApplicationController
   end
 
   def update
-    @expenditure = Expenditure.find(params[:id])
-    @expenditure.update(user_params)
+    @expenditure.update(expenditure_params)
 
     respond_to do |format|
       format.html { redirect_back(fallback_location: expenditures_path) }
@@ -52,8 +51,6 @@ class ExpendituresController < ApplicationController
   end
 
   def destroy
-    @expenditure = Expenditure.find(params[:id])
-
     respond_to do |format|
       if @expenditure.destroy
         format.html { redirect_back(fallback_location: expenditures_path) }
@@ -64,8 +61,12 @@ class ExpendituresController < ApplicationController
 
   private
 
-  def user_params
+  def expenditure_params
     params.require(:expenditure).permit(:amount, :title, :category, :date)
+  end
+
+  def set_expenditure
+    @expenditure = Expenditure.find(params[:id])
   end
 
   def sort_column
