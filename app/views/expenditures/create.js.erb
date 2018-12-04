@@ -3,8 +3,5 @@ $("#modal-window").modal("hide");
     .prepend($('<%= j render @expenditure %>')
       .hide()
       .fadeIn('normal')
+      .addClass('blink-green')
     );
-
-$('#expenditure_<%= @expenditure.id %>')
-  .animate({backgroundColor: "#afedc3"}, 200)
-  .animate({backgroundColor: "#fff"}, 400)
