@@ -32,6 +32,17 @@ table {
   }
 }
 
+@keyframes blink-green {
+    0%   {background-color: white;}
+    50%   {background-color: #afedc3;}
+    100% {background-color: white;}
+}
+
+.blink-green {
+    -webkit-animation: blink-green 1s ease-out;
+    animation: blink-green 1s ease 0.2s;
+}
+
 /* header */
 
 .navbar {
