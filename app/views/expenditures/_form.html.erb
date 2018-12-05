@@ -32,13 +32,15 @@
     <div class="form-row">
       <div class="form-group col-sm-5">
         <%= f.label :date %>
-        <%= f.date_field :date,
+        <%= f.text_field :date,
           value:  @expenditure.date || Time.zone.today,
-          class: "form-control" %>
+          class: "form-control",
+          id: "expenditure_date" %>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.button class: "btn btn-primary",
+      'data-disable-with' => fa_icon('spinner spin', text: 'Please wait...').html_safe %>
   </div>
 <% end %>

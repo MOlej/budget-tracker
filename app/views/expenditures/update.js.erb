@@ -1,5 +1,3 @@
 $("#modal-window").modal("hide");
 $('#expenditure_<%= @expenditure.id %>').replaceWith('<%= j render @expenditure %>');
-$('#expenditure_<%= @expenditure.id %>')
-  .animate({backgroundColor: "#afedc3"}, 200)
-  .animate({backgroundColor: "#fff"}, 400)
+$('#expenditure_<%= @expenditure.id %>').addClass('blink-green');

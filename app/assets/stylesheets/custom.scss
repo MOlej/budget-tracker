@@ -3,6 +3,7 @@ $theme-colors: (
   "secondary": #a8255a,
 );
 @import "bootstrap";
+@import "font-awesome";
 
 /* debug */
 
@@ -30,6 +31,17 @@ table {
     vertical-align: middle;
     justify-content: center;
   }
+}
+
+@keyframes blink-green {
+    0%   {background-color: white;}
+    50%   {background-color: #afedc3;}
+    100% {background-color: white;}
+}
+
+.blink-green {
+    -webkit-animation: blink-green 1s ease-out;
+    animation: blink-green 1s ease 0.2s;
 }
 
 /* header */

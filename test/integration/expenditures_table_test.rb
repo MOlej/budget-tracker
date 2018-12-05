@@ -55,7 +55,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     assert page.has_field?('expenditure_amount', with: /^$/, type: 'number')
     assert page.has_field?('expenditure_title', with: '', type: 'text')
     assert page.has_field?('expenditure_category', with: '', type: 'select')
-    assert page.has_field?('expenditure_date', with: Time.zone.today, type: 'date')
+    assert page.has_field?('expenditure_date', with: Time.zone.today.strftime, type: 'text')
   end
 
   test 'sort table' do
@@ -105,7 +105,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
       assert page.has_field?('expenditure_amount', with: '1.99', type: 'number')
       assert page.has_field?('expenditure_title', with: 'Pizza', type: 'text')
       assert page.has_field?('expenditure_category', with: 'Fast Food', type: 'select')
-      assert page.has_field?('expenditure_date', with: '2018-10-26', type: 'date')
+      assert page.has_field?('expenditure_date', with: '2018-10-26', type: 'text')
 
       fill_in('expenditure_title', with: 'Test title')
       click_button('Update Expenditure')
