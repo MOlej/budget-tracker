@@ -40,6 +40,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.button class: "btn btn-primary",
+      'data-disable-with' => fa_icon('spinner spin', text: 'Please wait...').html_safe %>
   </div>
 <% end %>

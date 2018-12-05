@@ -7,7 +7,7 @@
         <div id="expenditures_search">
           <%= render 'search' %>
         </div>
-        <%= link_to 'Add new expenditure', new_expenditure_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary'}  %>
+        <%= link_to 'Add new expenditure', new_expenditure_path, {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary', 'data-disable-with' => fa_icon('spinner spin', text: 'Please wait...').html_safe} %>
         <div id="modal-window" class="modal hide fade expenditure-modal" role="dialog" aria-labelledby="expenditure-modal" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content"></div>

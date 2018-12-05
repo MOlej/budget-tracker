@@ -7,11 +7,13 @@
     <%= link_to "edit",
       edit_expenditure_path(expenditure),
       class: "btn btn-edit btn-sm",
-      remote: true %>
+      remote: true,
+      'data-disable-with' => fa_icon('spinner spin').html_safe %>
     <%= link_to "delete",
       expenditure,
       method: :delete,
       class: "btn btn-danger btn-sm",
-      remote: true %>
+      remote: true,
+      'data-disable-with' => fa_icon('spinner spin').html_safe %>
   </td>
 </tr>
