@@ -3,7 +3,15 @@
   <td class="align-middle"><%= expenditure.title %></td>
   <td class="align-middle"><%= expenditure.category %></td>
   <td class="align-middle"><%= expenditure.date %></td>
-  <td class="align-middle"><%= link_to "delete", expenditure,
-                                          method: :delete,
-                                          class: "btn btn-danger btn-sm"%></td>
+  <td class="align-middle">
+    <%= link_to "edit",
+      edit_expenditure_path(expenditure),
+      class: "btn btn-edit btn-sm",
+      remote: true %>
+    <%= link_to "delete",
+      expenditure,
+      method: :delete,
+      class: "btn btn-danger btn-sm",
+      remote: true %>
+  </td>
 </tr>

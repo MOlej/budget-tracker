@@ -1,13 +1,21 @@
 class Expenditure < ApplicationRecord
   before_save :set_defaults
 
-  default_scope -> { order(date: :desc) }
+  # default_scope -> { order(date: :desc) }
 
   def set_defaults
-      self.amount ||= 0
-      self.title = "Untitled" if self.title.empty?
-      self.category = "Uncategorised" if self.category.empty?
-      self.date ||= Time.zone.today
+    self.amount ||= 0
+    self.title = "Untitled" if self.title.empty?
+    self.category = "Uncategorised" if self.category.empty?
+    self.date ||= Time.zone.today
+  end
+
+  def self.search(search)
+    if search
+      where('amount LIKE :search OR title LIKE :search OR category LIKE :search OR date LIKE :search', search: "%#{search}%")
+    else
+      all
+    end
   end
 
   CATEGORIES = [
