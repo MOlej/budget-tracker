@@ -1,4 +1,4 @@
-$('tr#expenditure_<%= @expenditure.id %> > td:nth-child(4) > a').replaceWith('<a class="btn btn-danger btn-sm">delete</a>');
+$('tr#expenditure_<%= @expenditure.id %> > td:nth-child(5) > a.btn.btn-danger').replaceWith('<a class="btn btn-danger btn-sm">delete</a>');
 $('#expenditure_<%= @expenditure.id %>')
   .animate({ backgroundColor: "#df4957", opacity: 0 }, 600, function (){
       $(this).remove();
