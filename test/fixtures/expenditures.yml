@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 30
+  title: 10 galons
+  category: Gas & Fuel
+  date: 2018-10-23
+
+two:
+  amount: 1.99
+  title: Pizza
+  category: Fast Food
+  date: 2018-10-26

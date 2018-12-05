@@ -1,0 +1,28 @@
+<tr>
+  <%= form_for @expenditure, :html => { class: "needs-validation" } do |f| %>
+  <td class="align-middle" align="center">
+  <%= f.number_field :amount, style: "width: 70px;", class: "form-control", min: "0", step: "0.01" %>
+  </td>
+
+  <td class="align-middle" align="center">
+  <%= f.text_field :title, class: "form-control" %>
+  </td>
+
+  <td class="align-middle" align="center">
+    <%= f.select :category, grouped_options_for_select(Expenditure::CATEGORIES),
+                            { include_blank: true },
+                            style: "width: 150px",
+                            class: "form-control custom-select" %>
+  </td>
+
+  <td class="align-middle" align="center">
+    <%= f.date_field :date, style: "width: 150px",
+                            value: Time.zone.today,
+                            class: "form-control" %>
+  </td>
+
+  <td class="align-middle" align="center">
+  <%= f.submit "Add", class: "btn btn-primary" %>
+  </td>
+  <% end %>
+</tr>

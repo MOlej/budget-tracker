@@ -1,0 +1,9 @@
+<tr id=<%= "expenditure_#{expenditure.id}" %>>
+  <td class="align-middle"><%= ActionController::Base.helpers.number_to_currency(expenditure.amount) %></td>
+  <td class="align-middle"><%= expenditure.title %></td>
+  <td class="align-middle"><%= expenditure.category %></td>
+  <td class="align-middle"><%= expenditure.date %></td>
+  <td class="align-middle"><%= link_to "delete", expenditure,
+                                          method: :delete,
+                                          class: "btn btn-danger btn-sm"%></td>
+</tr>
