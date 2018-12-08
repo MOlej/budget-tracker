@@ -1,37 +1,22 @@
 class Expenditure < ApplicationRecord
-  before_save :set_defaults
+  belongs_to :category
+
+  before_validation :set_defaults
 
   # default_scope -> { order(date: :desc) }
 
   def set_defaults
     self.amount ||= 0
     self.title = "Untitled" if self.title.empty?
-    self.category = "Uncategorised" if self.category.empty?
+    self.category_id ||= "1"
     self.date ||= Time.zone.today
   end
 
   def self.search(search)
     if search
-      where('amount LIKE :search OR title LIKE :search OR category LIKE :search OR date LIKE :search', search: "%#{search}%")
+      where('amount LIKE :search OR title LIKE :search OR name LIKE :search OR date LIKE :search', search: "%#{search}%")
     else
       all
     end
   end
-
-  CATEGORIES = [
-    ['Auto & Transport',
-      ['Gas & Fuel', 'Parking', 'Service & Auto Parts', 'Auto Payment', 'Auto Insurance']],
-    ['Bills',
-      ['Electricity', 'Gas', 'Heating', 'Internet', 'Television', 'Phone', 'Rent', 'Water']],
-    ['Entertainment',
-      ['Games', 'Events', 'Movies', 'Travel']],
-    ['Food & Dining',
-      ['Alcohol', 'Coffee shops', 'Fast Food', 'Groceries', 'Restaurant']],
-    ['Home',
-      ['Accessories and Furnishing', 'Garden', 'Home Insurance', 'Renovation', 'Services']],
-    ['Kids',
-      ['Activies', 'Allowance', 'Baby Supplies', 'Babysitter & Daycare', 'School Supplies', 'Toys']],
-    ['Personal',
-      ['Books', 'Clothing', 'Education', 'Electronics & Software', 'Health & Fitness', 'Hobbies', 'Newspapers & Magazines']]
-  ]
 end
