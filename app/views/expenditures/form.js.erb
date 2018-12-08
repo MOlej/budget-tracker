@@ -2,5 +2,6 @@ $("#modal-window").find(".modal-content").html("<%= j (render 'form') %>");
 $("#modal-window").modal();
 
 $("#expenditure_date").datepicker({
-  firstDay: 1
+  'firstDay': 1,
+  'dateFormat': 'yy-mm-dd'
 });
