@@ -10,15 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_154432) do
+ActiveRecord::Schema.define(version: 2018_12_06_214502) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
 
   create_table "expenditures", force: :cascade do |t|
     t.decimal "amount", precision: 6, scale: 2
     t.string "title"
-    t.string "category"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_expenditures_on_category_id"
   end
 
 end

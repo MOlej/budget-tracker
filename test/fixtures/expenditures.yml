@@ -3,27 +3,29 @@
 one:
   amount: 30
   title: 10 galons
-  category: Gas & Fuel
+  category_id: <%= Category.find_by(name: 'Gas & Fuel').id %>
   date: 2018-10-23
 
 two:
   amount: 1.99
   title: Pizza
-  category: Fast Food
+  category_id: <%= Category.find_by(name: 'Fast Food').id %>
   date: 2018-10-26
 
 three:
   amount: 5.99
   title: Food
-  category: Groceries
+  category_id: <%= Category.find_by(name: 'Groceries').id %>
   date: 2018-10-24
 
 four:
   amount: 30
   title: A
+  category_id: <%= Category.find_by(name: 'Uncategorised').id %>
   date: 2018-10-21
 
 five:
   amount: 6
   title: a
+  category_id: <%= Category.find_by(name: 'Uncategorised').id %>
   date: 2018-10-22

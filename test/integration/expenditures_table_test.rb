@@ -11,7 +11,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     click_link('Add new expenditure')
     fill_in('expenditure_amount', with: '52.13')
     fill_in('expenditure_title', with: 'Walmart')
-    select('Groceries', from: 'expenditure_category')
+    select('Groceries', from: 'expenditure_category_id')
     fill_in('expenditure_date', with: Time.zone.today)
 
     click_button('Create Expenditure')
@@ -38,7 +38,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     click_button('Create Expenditure')
     wait_for_ajax
 
-    expenditure_id = "expenditure_#{Expenditure.last.id}"
+    expenditure_id = "expenditure_#{Expenditure.order('created_at').last.id}"
     expenditure = page.find_by_id(expenditure_id).find_css('td')
 
     assert expenditure[0].visible_text.eql? '$0.00'
@@ -54,7 +54,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
 
     assert page.has_field?('expenditure_amount', with: /^$/, type: 'number')
     assert page.has_field?('expenditure_title', with: '', type: 'text')
-    assert page.has_field?('expenditure_category', with: '', type: 'select')
+    assert page.has_field?('expenditure_category_id', with: '', type: 'select')
     assert page.has_field?('expenditure_date', with: Time.zone.today.strftime, type: 'text')
   end
 
@@ -92,7 +92,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'edit expendtiure' do
+  test 'edit expenditure' do
     visit('/expenditures')
 
     within(:xpath, '//*[@id="expenditures_table"]/tbody/tr[1]') do
@@ -104,7 +104,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     within(:xpath, '//*[@id="modal-window"]/div/div') do
       assert page.has_field?('expenditure_amount', with: '1.99', type: 'number')
       assert page.has_field?('expenditure_title', with: 'Pizza', type: 'text')
-      assert page.has_field?('expenditure_category', with: 'Fast Food', type: 'select')
+      assert page.has_field?('expenditure_category_id', with: expenditures[1].category_id, type: 'select')
       assert page.has_field?('expenditure_date', with: '2018-10-26', type: 'text')
 
       fill_in('expenditure_title', with: 'Test title')
@@ -128,7 +128,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     wait_for_ajax
 
     assert page.has_content?(expenditures[0].title)
-    assert page.has_content?(expenditures[0].category)
+    assert page.has_content?(expenditures[0].category.name)
     assert page.has_content?(expenditures[0].amount.to_s)
 
     assert_not page.has_content?(expenditures[1].title)
