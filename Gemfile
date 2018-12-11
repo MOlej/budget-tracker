@@ -20,6 +20,8 @@ gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'faker'
+  gem 'rubocop'
 end
 
 group :development do
