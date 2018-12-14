@@ -54,6 +54,10 @@ table {
   font: 1.5em "Fira Sans", sans-serif;
 }
 
+#navbar-user-name {
+  color: white;
+}
+
 /* buttons */
 .btn-edit {
   background-color: #2586a8;
@@ -72,6 +76,16 @@ table {
 /* expenditure form modal */
 #expenditure-modal, .modal-dialog {
   max-width: 30% !important;
+}
+
+/* devise error messages */
+
+#error_explanation {
+  ul {
+    margin: 0;
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
 }
 
 /* row margins */

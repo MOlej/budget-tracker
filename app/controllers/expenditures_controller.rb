@@ -3,17 +3,13 @@ class ExpendituresController < ApplicationController
 
   before_action :set_expenditure, only: %i[edit update destroy]
   before_action :set_categories, only: %i[edit new]
+  before_action :authenticate_user!
 
   def index
-   @expenditures = Expenditure
-     .joins(:category)
-     .search(params[:search])
-     .order(
-       Arel.sql("#{case_insensitive(sort_column)} #{sort_direction}"),
-       date: :desc,
-       created_at: :desc
-     )
-    @expenditure = Expenditure.new
+    @expenditures = Expenditure
+      .users_expenditures(current_user)
+      .search(params[:search])
+      .order_by(case_insensitive(sort_column), sort_direction)
   end
 
   def new
@@ -27,6 +23,7 @@ class ExpendituresController < ApplicationController
 
   def create
     @expenditure = Expenditure.new(expenditure_params)
+    @expenditure.user_id = current_user.id
 
     respond_to do |format|
       if @expenditure.save

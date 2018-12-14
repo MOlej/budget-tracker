@@ -1,13 +1,14 @@
 class Expenditure < ApplicationRecord
   belongs_to :category
+  belongs_to :user
 
   before_validation :set_defaults
 
-  # default_scope -> { order(date: :desc) }
+  scope :users_expenditures, ->(user) { where(user_id: user.id).joins(:category) }
 
   def set_defaults
     self.amount ||= 0
-    self.title = "Untitled" if self.title.empty?
+    self.title = "Untitled" if title.empty?
     self.category_id ||= "1"
     self.date ||= Time.zone.today
   end
@@ -18,5 +19,13 @@ class Expenditure < ApplicationRecord
     else
       all
     end
+  end
+
+  def self.order_by(column, direction)
+    order(
+      Arel.sql("#{column} #{direction}"),
+      date: :desc,
+      created_at: :desc
+    )
   end
 end

@@ -1,0 +1,9 @@
+user1:
+  name: user1
+  email: user1@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+
+user_with_no_expenditures:
+  name: I don't spend money
+  email: cheap@example.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>

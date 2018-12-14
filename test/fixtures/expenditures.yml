@@ -5,27 +5,32 @@ one:
   title: 10 galons
   category_id: <%= Category.find_by(name: 'Gas & Fuel').id %>
   date: 2018-10-23
+  user_id: <%= ActiveRecord::FixtureSet.identify(:user1) %>
 
 two:
   amount: 1.99
   title: Pizza
   category_id: <%= Category.find_by(name: 'Fast Food').id %>
   date: 2018-10-26
+  user_id: <%= ActiveRecord::FixtureSet.identify(:user1) %>
 
 three:
   amount: 5.99
   title: Food
   category_id: <%= Category.find_by(name: 'Groceries').id %>
   date: 2018-10-24
+  user_id: <%= ActiveRecord::FixtureSet.identify(:user1) %>
 
 four:
   amount: 30
   title: A
   category_id: <%= Category.find_by(name: 'Uncategorised').id %>
   date: 2018-10-21
+  user_id: <%= ActiveRecord::FixtureSet.identify(:user1) %>
 
 five:
   amount: 6
   title: a
   category_id: <%= Category.find_by(name: 'Uncategorised').id %>
   date: 2018-10-22
+  user_id: <%= ActiveRecord::FixtureSet.identify(:user1) %>

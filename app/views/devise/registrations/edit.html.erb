@@ -1,0 +1,72 @@
+<center>
+  <%= devise_error_messages! %>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <h2>Edit profile</h2>
+
+      <%= form_for(resource, as: resource_name, url: profile_path, html: { method: :put }) do |f| %>
+
+        <div class="field form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name,
+            autofocus: true,
+            autocomplete: "name",
+            class: "form-control" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password,
+            autocomplete: "new-password",
+            class: "form-control" %>
+          <small>
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+          <br/ >
+          <i>(leave blank if you don't want to change it)</i></small>
+        </div>
+
+        <div class="field form-group">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation,
+            autocomplete: "new-password",
+            class: "form-control" %>
+        </div>
+
+        <div class="field form-group">
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password,
+            autocomplete: "current-password",
+            class: "form-control" %>
+        <small><i>(we need your current password to confirm your changes)</i></small>
+
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+      <br />
+</center>
+<center>
+  <div class="row justify-content-center">
+
+    <div class="col-4">
+    <h3>Unhappy?</h3>
+    <%= button_to "Cancel my account",
+        profile_path,
+        data: { confirm: "Are you sure?" },
+        method: :delete,
+        class: "btn btn-danger" %>
+    <br />
+    <%= link_to "Back", :back, class: "btn btn-primary" %>
+  </div>
+  </div>
+</center>

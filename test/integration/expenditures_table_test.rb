@@ -3,6 +3,15 @@ require 'test_helper'
 class ExpendituresTableTest < ActionDispatch::IntegrationTest
   include Capybara::DSL
   include Capybara::Minitest::Assertions
+  include Devise::Test::IntegrationHelpers
+
+  def setup
+    @user = users(:user1)
+    @user.save
+    @user.confirm
+
+    sign_in @user
+  end
 
   test 'add and delete expenditure' do
     visit('/expenditures')
@@ -17,7 +26,7 @@ class ExpendituresTableTest < ActionDispatch::IntegrationTest
     click_button('Create Expenditure')
     wait_for_ajax
 
-    expenditure_id = "expenditure_#{Expenditure.last.id}"
+    expenditure_id = "expenditure_#{Expenditure.order('created_at').last.id}"
     expenditure = page.find_by_id(expenditure_id).find_css('td')
 
     assert expenditure[0].visible_text.eql? '$52.13'
