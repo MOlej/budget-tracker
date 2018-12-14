@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-static-top navbar-expand-lg navbar-dark bg-dark">
   <%= link_to "Budget tracker",
     root_path,
     class: "navbar-brand",
@@ -7,26 +7,41 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <%= link_to "Home", root_url, class: "nav-item nav-link" %>
-      <%= link_to "Budgets", "#", class: "nav-item nav-link" %>
-    </div>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <div style="margin: 10px 20px 10px 0px;">
-    <%= link_to "Log in", "#", class: "btn btn-primary", role: "button" %>
-    </div>
-    <%= link_to "Sign up", "#", class: "btn btn-secondary", role: "button" %>
+    <% if user_signed_in? %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span id="navbar-user-name" class="nav-text">
+              Logged in as: <strong><%= current_user.name %></strong>
+            </span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Your expenditures",
+              expenditures_path,
+              class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "Settings",
+              edit_user_registration_path,
+              class: "dropdown-item" %>
+            <%= link_to "Log out",
+              destroy_user_session_path,
+              method: :delete,
+              class: "dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+    <% else %>
+      <div class="navbar-nav ml-auto">
+        <%= link_to "Log in",
+          new_user_session_path,
+          class: "btn btn-primary nav-btn",
+          role: "button" %>
+        <%= link_to "Sign up",
+          new_user_registration_path,
+          class: "btn btn-secondary nav-btn",
+          style: "margin-left: 10px;",
+          role: "button" %>
+      </div>
+    <% end %>
   </div>
 </nav>
