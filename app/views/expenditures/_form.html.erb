@@ -2,7 +2,7 @@
   <h4 class="modal-title" id="expenditure_modal"><%= "#{action_name.capitalize} #{controller_name.singularize}" %></h4>
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<%= form_for @expenditure, html: { class: "needs-validation form-horizontal" }, remote: true do |f| %>
+<%= form_for @expenditure, html: { class: "needs-validation form-horizontal", novalidate: "novalidate" }, remote: true do |f| %>
   <div class="modal-body">
     <div class="form-row">
       <div class="form-group col-sm-5">
@@ -10,7 +10,11 @@
         <%= f.number_field :amount,
           class: "form-control",
           min: "0",
+          max: "999999.99",
           step: "0.01" %>
+        <div class="invalid-feedback">
+          <i>should be lower than 10,000</i>
+        </div>
       </div>
 
       <div class="form-group col-sm-7">
@@ -26,7 +30,10 @@
     <div class="form-row">
       <div class="form-group col-sm-12">
         <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control" %>
+        <%= f.text_field :title, class: "form-control", pattern: ".{0,50}" %>
+      <div class="invalid-feedback">
+        <i>should be shorter than 51 characters.</i>
+      </div>
       </div>
     </div>
 

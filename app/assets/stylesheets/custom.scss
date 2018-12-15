@@ -24,12 +24,14 @@ $theme-colors: (
 
 table {
   text-align: center;
+  table-layout: fixed;
   th {
     font-size: 1.2em;
   }
   td {
     vertical-align: middle;
     justify-content: center;
+    word-wrap: break-word;
   }
 }
 

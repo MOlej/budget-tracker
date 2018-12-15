@@ -5,3 +5,13 @@ $("#expenditure_date").datepicker({
   'firstDay': 1,
   'dateFormat': 'yy-mm-dd'
 });
+
+var form = $('form#new_expenditure');
+var title = $('#expenditure_title');
+form.on('submit', function (event) {
+  if (form[0].checkValidity() === false || title.val().length >= 50 ) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  form.addClass('was-validated');
+});
