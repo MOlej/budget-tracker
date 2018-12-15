@@ -23,6 +23,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'faker'
   gem 'rubocop'
+  gem 'sqlite3'
 end
 
 group :development do
