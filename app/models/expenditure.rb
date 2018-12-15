@@ -11,7 +11,7 @@ class Expenditure < ApplicationRecord
 
   def self.search(search)
     if search
-      where('amount LIKE :search OR title LIKE :search OR name LIKE :search OR date LIKE :search', search: "%#{search}%")
+      where('cast(amount as text) ILIKE :search OR title ILIKE :search OR name ILIKE :search OR cast(date as text) ILIKE :search', search: "%#{search}%")
     else
       all
     end
