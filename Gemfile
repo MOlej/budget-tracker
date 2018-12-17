@@ -14,9 +14,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'puma', '~> 3.11'
+gem 'pg'
 gem 'rails', '~> 5.2.1'
 gem 'sass-rails', '~> 5.0'
-gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 
 group :development, :test do
