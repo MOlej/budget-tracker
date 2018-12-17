@@ -14,6 +14,11 @@ jobs:
            PGUSER: budget-tracker
            RAILS_ENV: test
 
+       - image: circleci/postgres:11.1-alpine-ram
+         environment:
+           POSTGRES_USER: budget-tracker-postgres
+           POSTGRES_DB: budget_tracker_test
+
     steps:
       - checkout
 
