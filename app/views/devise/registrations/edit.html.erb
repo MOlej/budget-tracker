@@ -1,10 +1,23 @@
 <center>
   <%= devise_error_messages! %>
-  <div class="row justify-content-center">
+</center>
+<div class="row justify-content-between">
+  <div class="col-2">
+    <ul>
+      <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+      <li><%= link_to 'Custom categories', user_categories_path %></li>
+    </ul>
+  </div>
+  <center>
     <div class="col-auto">
       <h2>Edit profile</h2>
 
-      <%= form_for(resource, as: resource_name, url: profile_path, html: { method: :put }) do |f| %>
+      <%= form_for(
+        resource,
+        as: resource_name,
+        url: profile_edit_path,
+        html: { method: :put }
+      ) do |f| %>
 
         <div class="field form-group">
           <%= f.label :name %>
@@ -52,16 +65,18 @@
         </div>
       <% end %>
     </div>
+  </center>
+  <div class="col-2">
   </div>
-      <br />
-</center>
+</div>
+<br />
 <center>
   <div class="row justify-content-center">
 
     <div class="col-4">
     <h3>Unhappy?</h3>
     <%= button_to "Cancel my account",
-        profile_path,
+        profile_edit_path,
         data: { confirm: "Are you sure?" },
         method: :delete,
         class: "btn btn-danger" %>

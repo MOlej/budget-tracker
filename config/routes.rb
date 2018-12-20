@@ -18,8 +18,15 @@ Rails.application.routes.draw do
 
     get 'signup', to: 'registrations#new', as: :new_user_registration
     post 'signup', to: 'registrations#create', as: :user_registration
-    get 'profile', to: 'registrations#edit', as: :edit_user_registration
-    put 'profile', to: 'registrations#update'
-    delete 'profile', to: 'registrations#destroy'
+    get 'profile/edit', to: 'registrations#edit', as: :edit_user_registration
+    patch 'profile/edit', to: 'registrations#update'
+    delete 'profile/edit', to: 'registrations#destroy'
   end
+
+  scope '/profile' do
+    resources :user_categories, controller: :categories, only: %i[index create destroy]
+  end
+ # get 'profile/custom_categories', to: 'categories#user_categories', as: :user_categories
+ # post 'profile/custom_categories', to: 'categories#user_categories'
+ # match 'profile/custom_categories' => 'categories#users_categories', as: :user_cateogories, via: [:get, :post]
 end
